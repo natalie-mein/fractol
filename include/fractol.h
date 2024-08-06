@@ -6,7 +6,7 @@
 /*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:14:57 by nmeintje          #+#    #+#             */
-/*   Updated: 2024/08/01 13:16:15 by nmeintje         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:27:17 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 
 typedef struct	s_fractol
 {
+	mlx_t		*mlx;
+	mlt_image_t	*image;
 }	t_fractol;
 
 #endif
