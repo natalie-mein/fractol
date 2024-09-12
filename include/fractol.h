@@ -24,11 +24,18 @@
 
 # define WIDTH 1080
 # define HEIGHT 1080
+# define MAX_ITER 100
+# define MANDELBROT 1
+# define JULIA 2
+# define BURNING 3
+# define MANDELBOX 4
+# define JULIA_SETS 5
 
 typedef struct	s_fractol
 {
 	mlx_t		*mlx;
 	mlt_image_t	*image;
+	int			type;
 }	t_fractol;
 
 #endif

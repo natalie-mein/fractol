@@ -6,7 +6,7 @@
 #    By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/29 13:13:36 by nmeintje          #+#    #+#              #
-#    Updated: 2024/08/01 10:52:22 by nmeintje         ###   ########.fr        #
+#    Updated: 2024/09/04 13:01:18 by nmeintje         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -rf
 
+# do I need this? .c.o part?
 .c.o:
 	$(CC) $(CFLAGS) -c -I $(HEADERS) $< -o $(<:.c=.o)
 
@@ -45,6 +46,7 @@ $(NAME): mlx libft $(OBJS)
 	@$(CC) $(OBJS) $(LIBFT) $(MLXLIB) $(HEADERS) -o $@
 
 mlx:
+	@cd lib && git clone https://github.com/codam-coding-college/MLX42.git
 	@cmake $(MLX_DIR) -B $(MLX_DIR)/build && make -C $(MLX_DIR)/build -j4
 
 libft:
@@ -57,7 +59,7 @@ all: $(NAME)
 
 clean:
 	@$(RM) $(OBJS)
-	@$(RM) $(SRC_DIR)/build
+	@$(RM) $(MLX_DIR)/build
 	@make -C $(LIBFT_DIR) clean
 
 fclean: clean

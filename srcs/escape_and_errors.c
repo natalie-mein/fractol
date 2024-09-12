@@ -16,7 +16,7 @@ void	help_msg(void)
 {
 	ft_putendl_fd("~~~~~~~~Available Fractals~~~~~~~~~~", 1);
 	ft_putendl_fd("\tPlease type:", 1);
-	ft_putendl_fd("Mandelbrot or Julia", 1);
+	ft_putendl_fd("mandelbrot, julia, burning or mandelbox", 1);
 	ft_putendl_fd("\n", 1);
 	ft_putendl_fd("For Julia, you may specify starting values", 1);
 	ft_putendl_fd("between -2.0 and 2.0. Remember to include", 1);
@@ -26,7 +26,6 @@ void	help_msg(void)
 
 void my_escape_hook(mlx_key_data_t keydata, void* param)
 {
-	// If we PRESS the 'Escape' key, the window closes.
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(param);
 }
