@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractal_functions.c                                :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/02 14:33:36 by nmeintje          #+#    #+#             */
-/*   Updated: 2024/09/02 14:49:42 by nmeintje         ###   ########.fr       */
+/*   Created: 2024/09/13 13:05:43 by nmeintje          #+#    #+#             */
+/*   Updated: 2024/09/13 13:05:45 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-// Mandelbrot function
+// mandelbrot color
 
-// Julia function
+// julia color
 
-// Burning ship function
+// burning color
 
-// Mandelbox function
+// mandelbox color

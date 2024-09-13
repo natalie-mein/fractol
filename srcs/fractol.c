@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-static int	ft_check_args(char *str, t_fractol fractol)
+static int	ft_check_args(char *str, t_fractol *fractol)
 {
 	if (ft_strncmp(str, "mandelbrot", 11) == 0)
 	{
@@ -41,9 +41,21 @@ static int	ft_check_args(char *str, t_fractol fractol)
 	}
 }
 
-static void 	ft_process_args(int argc, char **argv)
+static void	fractol_init(t_fractol *fractol)
 {
+	if (fractol->type == MANDELBROT)
+		mandelbrot_init(fractol);
+	else if (fractol->type == JULIA)
+		julia_init(fractol);
+	else if (fractol->type == BURNING)
+		burning_init(fractol);
+	else
+		mandelbox_init(fractol);
+}
 
+static void	ft_fractal(void *param)
+{
+	t_fractol	*fractol;
 }
 
 int	main(int argc, char **argv)
@@ -56,10 +68,12 @@ int	main(int argc, char **argv)
 		help_msg();
 		// probably need to free the pointer here.
 	}
-	if (ft_check_args(fractol))
-		ft_process_args(argc, argv);
-	//mlx_loop_hook(mlx, ft_hook, mlx);
-	//mlx_loop(mlx);
-	mlx_terminate(mlx);
+	fractol_init(&ft_fractal);
+	mlx_loop_hook(fractol->mlx, &fractol, fractol);
+	mlx_loop_hook(fractol->mlx, ft_hook, fractol);
+	mlx_loop_hook(fractol->mlx, arrow_keys, fractol);
+	mlx_scroll_hook(fractol->mlx, &ft_scroll, fractol);
+	mlx_loop(fractol->mlx);
+	mlx_terminate(fractol->mlx);
 	return (0);
 }

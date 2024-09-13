@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   escape_and_errors.c                                :+:      :+:    :+:   */
+/*   utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -24,8 +24,8 @@ void	help_msg(void)
 	exit (1);
 }
 
-void my_escape_hook(mlx_key_data_t keydata, void* param)
-{
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		mlx_close_window(param);
-}
+// ft_abs
+
+// pixel_colors
+
+// ft_atof

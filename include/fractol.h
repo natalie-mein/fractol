@@ -34,8 +34,22 @@
 typedef struct	s_fractol
 {
 	mlx_t		*mlx;
-	mlt_image_t	*image;
+	mlx_image_t	*image;
 	int			type;
+	int32_t		x_pix;
+	int32_t		y_pix;
 }	t_fractol;
+
+/* Initialization*/
+void    mandelbrot_init(t_fractol *fractol);
+void    julia_init(t_fractol *fractol);
+void    burning_init(t_fractol *fractol);
+void    mandelbox_init(t_fractol *fractol);
+
+/* hooks*/
+void	help_msg(void);
+void	ft_hook(mlx_key_data_t keydata, void* param);
+void	arrow_keys(mlx_key_data_t keydata, void* param);
+void    ft_scroll(double xdelta, double ydelta, void* param);
 
 #endif
