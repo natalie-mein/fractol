@@ -54,7 +54,7 @@ static void	fractol_init(t_fractol *fractol, char **av)
 		burning_init(fractol);
 	else
 		mandelbox_init(fractol);
-	// zoom
+	fractol->zoom = 1.05;
 	// color
 	fractol->mlx = mlx_init(WIDTH, HEIGHT, fractol->type, false);
 	fractol->image = mlx_new_image(fractol->mlx, WIDTH, HEIGHT);
@@ -96,14 +96,12 @@ int	main(int argc, char **argv)
 
 	fractol = (t_fractol *)malloc(sizeof(t_fractol));
 	if (argc < 2 || !ft_check_args(argv[1], fractol))
-	{
 		help_msg();
-		// probably need to free the pointer here.
-	}
 	fractol_init(fractol, argv);
 	mlx_loop_hook(fractol->mlx, &ft_fractal, fractol);
 	mlx_loop_hook(fractol->mlx, &ft_hook, fractol);
 	mlx_loop_hook(fractol->mlx, &arrow_keys, fractol);
+	mlx_loop_hook(fractol->mlx, &julia_hook, fractol);
 	mlx_scroll_hook(fractol->mlx, &ft_scroll, fractol);
 	mlx_loop(fractol->mlx);
 	mlx_terminate(fractol->mlx);

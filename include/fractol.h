@@ -46,11 +46,16 @@ typedef struct	s_fractol
 	double		r_max;
 	double		i_min;
 	double		i_max;
+	double		zoom;
 	t_map		c;
 	t_map		z;
 	t_map		julia;
 	int32_t		x_pix;
 	int32_t		y_pix;
+	double		x_ratio;
+	double		y_ratio;
+	double		diff;
+	double		mdiff;
 }	t_fractol;
 
 /* Initialization*/
@@ -64,6 +69,7 @@ void	help_msg(void);
 void	ft_hook(mlx_key_data_t keydata, void* param);
 void	arrow_keys(mlx_key_data_t keydata, void* param);
 void    ft_scroll(double xdelta, double ydelta, void* param);
+void    julia_hook(void *params);
 
 /* colors */
 float   mandel_color(t_fractol *fractol, int x, int y);
