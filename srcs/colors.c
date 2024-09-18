@@ -13,9 +13,16 @@
 #include "fractol.h"
 
 // mandelbrot color
+float   mandel_color(t_fractol *fractol, int x, int y)
+{}
 
 // julia color
+float   julia_color(t_fractol *fractol, int x, int y)
+{}
 
 // burning color
-
+float   burning_color(t_fractol *fractol, int x, int y)
+{}
 // mandelbox color
+float   mandelbox_color(t_fractol *fractol, int x, int y)
+{}

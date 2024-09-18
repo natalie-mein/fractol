@@ -29,13 +29,26 @@
 # define JULIA 2
 # define BURNING 3
 # define MANDELBOX 4
-# define JULIA_SETS 5
+
+typedef	struct s_map
+{
+	double	x;
+	double	y;
+}	t_map;
+
 
 typedef struct	s_fractol
 {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
 	int			type;
+	double		r_min;
+	double		r_max;
+	double		i_min;
+	double		i_max;
+	t_map		c;
+	t_map		z;
+	t_map		julia;
 	int32_t		x_pix;
 	int32_t		y_pix;
 }	t_fractol;
@@ -51,5 +64,11 @@ void	help_msg(void);
 void	ft_hook(mlx_key_data_t keydata, void* param);
 void	arrow_keys(mlx_key_data_t keydata, void* param);
 void    ft_scroll(double xdelta, double ydelta, void* param);
+
+/* colors */
+float   mandel_color(t_fractol *fractol, int x, int y);
+float   julia_color(t_fractol *fractol, int x, int y);
+float   burning_color(t_fractol *fractol, int x, int y);
+float   mandelbox_color(t_fractol *fractol, int x, int y);
 
 #endif

@@ -27,5 +27,7 @@ void	help_msg(void)
 // ft_abs
 
 // pixel_colors
-
-// ft_atof
+int32_t	ft_pixel(int32_t red, int32_t green, uint32_t blue, uint32_t a)
+{
+	return (red << 24 | green << 16 | blue << 8 | a);
+}

@@ -41,21 +41,53 @@ static int	ft_check_args(char *str, t_fractol *fractol)
 	}
 }
 
-static void	fractol_init(t_fractol *fractol)
+static void	fractol_init(t_fractol *fractol, char **av)
 {
 	if (fractol->type == MANDELBROT)
 		mandelbrot_init(fractol);
 	else if (fractol->type == JULIA)
+	{
 		julia_init(fractol);
+		julia_params(fractol, av);
+	}
 	else if (fractol->type == BURNING)
 		burning_init(fractol);
 	else
 		mandelbox_init(fractol);
+	// zoom
+	// color
+	fractol->mlx = mlx_init(WIDTH, HEIGHT, fractol->type, false);
+	fractol->image = mlx_new_image(fractol->mlx, WIDTH, HEIGHT);
+	mlx_image_to_window(fractol->mlx, fractol->image, 0, 0);
 }
 
 static void	ft_fractal(void *param)
 {
 	t_fractol	*fractol;
+	uint32_t	y;
+	uint32_t	x;
+	int			color;
+
+	fractol = (t_fractol *)param;
+	x = 0;
+	while (x < WIDTH)
+	{
+		y = 0;
+		while (y < HEIGHT)
+		{
+			if (fractol->type == MANDELBROT)
+				color = mandel_color(fractol, x, y);
+			else if (fractol->type == JULIA)
+				color = julia_color(fractol, x, y);
+			else if (fractol->type == BURNING)
+				color = burning_color(fractol, x, y);
+			else
+				color = mandelbox_color(fractol, x, y);
+			mlx_put_pixel(fractol->image, x, y, color);
+			y++;
+		}
+		x++;
+	}
 }
 
 int	main(int argc, char **argv)
@@ -68,10 +100,10 @@ int	main(int argc, char **argv)
 		help_msg();
 		// probably need to free the pointer here.
 	}
-	fractol_init(&ft_fractal);
-	mlx_loop_hook(fractol->mlx, &fractol, fractol);
-	mlx_loop_hook(fractol->mlx, ft_hook, fractol);
-	mlx_loop_hook(fractol->mlx, arrow_keys, fractol);
+	fractol_init(fractol, argv);
+	mlx_loop_hook(fractol->mlx, &ft_fractal, fractol);
+	mlx_loop_hook(fractol->mlx, &ft_hook, fractol);
+	mlx_loop_hook(fractol->mlx, &arrow_keys, fractol);
 	mlx_scroll_hook(fractol->mlx, &ft_scroll, fractol);
 	mlx_loop(fractol->mlx);
 	mlx_terminate(fractol->mlx);
