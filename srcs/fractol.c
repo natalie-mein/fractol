@@ -55,13 +55,17 @@ static void	fractol_init(t_fractol *fractol, char **av)
 	else
 		mandelbox_init(fractol);
 	fractol->zoom = 1.05;
-	// color
-	fractol->mlx = mlx_init(WIDTH, HEIGHT, fractol->type, false);
+	fractol->color = 1;
+	fractol->set = av[1];
+	fractol->rgb.red = 0.0;
+	fractol->rgb.green = 0.0;
+	fractol->rgb.blue = 0.0;
+	fractol->mlx = mlx_init(WIDTH, HEIGHT, fractol->set, false);
 	fractol->image = mlx_new_image(fractol->mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(fractol->mlx, fractol->image, 0, 0);
 }
 
-static void	ft_fractal(void *param)
+void	ft_fractal(void *param)
 {
 	t_fractol	*fractol;
 	uint32_t	y;
@@ -99,9 +103,9 @@ int	main(int argc, char **argv)
 		help_msg();
 	fractol_init(fractol, argv);
 	mlx_loop_hook(fractol->mlx, &ft_fractal, fractol);
-	mlx_loop_hook(fractol->mlx, &ft_hook, fractol);
+	mlx_key_hook(fractol->mlx, &ft_hook, fractol);
 	mlx_loop_hook(fractol->mlx, &arrow_keys, fractol);
-	mlx_loop_hook(fractol->mlx, &julia_hook, fractol);
+	/* mlx_loop_hook(fractol->mlx, &julia_hook, fractol);*/
 	mlx_scroll_hook(fractol->mlx, &ft_scroll, fractol);
 	mlx_loop(fractol->mlx);
 	mlx_terminate(fractol->mlx);

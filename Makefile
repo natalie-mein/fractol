@@ -19,6 +19,11 @@ SRC_DIR = ./srcs
 
 #src / obj files
 SOURCES = fractol.c \
+		colors.c \
+		hooks.c	\
+		initialization.c \
+		utils.c \
+		mandelbox.c \
 
 SRCS = $(addprefix $(SRC_DIR)/,$(SOURCES))
 
