@@ -19,7 +19,6 @@
 # include <math.h>
 # include <stdio.h>
 # include <string.h>
-# include "../lib/libft/libft.h"
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 
 # define WIDTH 1080
@@ -86,5 +85,7 @@ int32_t	compute_color(t_fractol *fractol, int i);
 /* utils */
 double	ft_atof(char *str);
 double	ft_abs(double x);
+void	ft_putendl_fd(char *s, int fd);
+size_t  ft_strlen(const char *str);
 
 #endif

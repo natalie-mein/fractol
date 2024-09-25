@@ -12,6 +12,23 @@
 
 #include "fractol_bonus.h"
 
+static int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned int	i;
+
+	i = 0;
+	if (!n)
+		return (0);
+	while (i < n && s1[i] && s2[i] && s1[i] == s2[i])
+	{
+		i++;
+	}
+	if (i == n)
+		return (0);
+	else
+		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
 static int	ft_check_args(char *str, t_fractol *fractol)
 {
 	if (ft_strncmp(str, "mandelbrot", 11) == 0)

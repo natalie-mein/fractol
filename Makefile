@@ -14,7 +14,6 @@ NAME = fractol
 
 # directories
 MLX_DIR = ./lib/MLX42
-LIBFT_DIR = ./lib/libft
 SRC_DIR = ./srcs
 BONUS_DIR = ./bonus
 OBJ_DIR = $(SRC_DIR)/objects
@@ -39,34 +38,29 @@ BONUS_SRC = $(addprefix $(BONUS_DIR)/,$(BONUS))
 OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(notdir $(SRCS)))
 BONUS_OBJS = $(patsubst %.c,$(BONUS_OBJ_DIR)/%.o,$(notdir $(BONUS)))
 
-HEADERS =  -I ./include -I $(MLX_DIR)/include -I $(LIBFT_DIR)
-BONUS_HEADERS = -I ./include_bonus -I $(MLX_DIR)/include -I $(LIBFT_DIR)
+HEADERS =  -I ./include -I $(MLX_DIR)
+BONUS_HEADERS = -I ./include_bonus -I $(MLX_DIR)
 
 MLXLIB = $(MLX_DIR)/build/libmlx42.a
-LIBFT = $(LIBFT_DIR)/libft.a
 
 # MLX42 dependencies - dl dynamically loaded lib, 
 # glfw graphics library framework m math library
 
 MLXLIB_FLAGS = $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -lm -lpthread
-LIBFT_FLAGS = -L $(LIBFT_DIR) -lft
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -rf
 
-all: $(LIBFT) $(MLXLIB) $(NAME)
+all: $(MLXLIB) $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(LIBFT_FLAGS) $(MLXLIB) $(MLXLIB_FLAGS) $(HEADERS) -o $@
+	@$(CC) $(OBJS) $(MLXLIB) $(MLXLIB_FLAGS) $(HEADERS) -o $@
 
 $(MLXLIB):
 	@cd lib && git clone https://github.com/codam-coding-college/MLX42.git
 	@cmake $(MLX_DIR) -B $(MLX_DIR)/build && make -C $(MLX_DIR)/build -j4
-
-$(LIBFT):
-	@make -C $(LIBFT_DIR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
@@ -74,8 +68,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-bonus: $(LIBFT) $(MLXLIB) $(BONUS_OBJS)
-	$(CC) $(BONUS_OBJS) $(LIBFT_FLAGS) $(MLXLIB) $(MLXLIB_FLAGS) $(BONUS_HEADERS) -o $(NAME)_bonus
+bonus: $(MLXLIB) $(BONUS_OBJS)
+	$(CC) $(BONUS_OBJS) $(MLXLIB) $(MLXLIB_FLAGS) $(BONUS_HEADERS) -o $(NAME)_bonus
 
 $(BONUS_OBJ_DIR)/%.o: $(BONUS_DIR)/%.c | $(BONUS_OBJ_DIR)
 	@$(CC) $(CFLAGS) $(BONUS_HEADERS) -c $< -o $@
@@ -87,14 +81,12 @@ clean:
 	@$(RM) $(OBJ_DIR)
 	@$(RM) $(BONUS_OBJ_DIR)
 	@$(RM) $(MLX_DIR)/build
-	@make -C $(LIBFT_DIR) clean
-
+	
 fclean: clean
 		@$(RM) $(NAME)
 		@$(RM) $(NAME)_bonus
 		@$(RM) $(MLX_DIR)
-		@make -C $(LIBFT_DIR) fclean
-
+		
 re:		fclean all
 
 .PHONY: all bonus clean fclean re

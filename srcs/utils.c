@@ -67,3 +67,15 @@ double	ft_atof(char *str)
 	}
 	return (sign * (n / dec));
 }
+
+void	ft_putendl_fd(char *s, int fd)
+{
+	int	n;
+
+	n = '\n';
+	if (s)
+	{
+		write(fd, s, ft_strlen(s));
+		write(fd, &n, 1);
+	}
+}

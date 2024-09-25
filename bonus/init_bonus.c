@@ -57,3 +57,13 @@ void	burning_init(t_fractol *fractol)
 	fractol->i_min = -2.0;
 	fractol->i_max = 2.0;
 }
+
+size_t  ft_strlen(const char *str)
+{
+        size_t  i;
+
+        i = 0;
+        while (str[i] != '\0')
+                i++;
+        return (i);
+}
