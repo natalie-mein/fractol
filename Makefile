@@ -59,7 +59,7 @@ $(NAME): $(OBJS)
 	@$(CC) $(OBJS) $(MLXLIB) $(MLXLIB_FLAGS) $(HEADERS) -o $@
 
 $(MLXLIB):
-	@cd lib && git clone https://github.com/codam-coding-college/MLX42.git
+	@mkdir -p lib && cd lib && git clone https://github.com/codam-coding-college/MLX42.git
 	@cmake $(MLX_DIR) -B $(MLX_DIR)/build && make -C $(MLX_DIR)/build -j4
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
