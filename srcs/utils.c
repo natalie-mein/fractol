@@ -14,6 +14,7 @@
 
 void	help_msg(void)
 {
+	ft_putendl_fd("Error: Invalid arguments provided.\n", 1);
 	ft_putendl_fd("~~~~~~~~Available Fractals~~~~~~~~~~", 1);
 	ft_putendl_fd("\tPlease type:", 1);
 	ft_putendl_fd("mandelbrot or julia", 1);

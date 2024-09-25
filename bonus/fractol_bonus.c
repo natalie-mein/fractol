@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol_bonus.c                                          :+:      :+:    :+:   */
+/*   fractol_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:14:09 by nmeintje          #+#    #+#             */
-/*   Updated: 2024/09/02 14:33:16 by nmeintje         ###   ########.fr       */
+/*   Updated: 2024/09/25 13:53:38 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,13 @@ int	main(int argc, char **argv)
 	t_fractol	*fractol;
 
 	fractol = (t_fractol *)malloc(sizeof(t_fractol));
+	if (!fractol)
+		return (1);
 	if (argc < 2 || !ft_check_args(argv[1], fractol))
+	{
+		free(fractol);
 		help_msg();
+	}
 	fractol_init(fractol, argv);
 	mlx_loop_hook(fractol->mlx, &ft_fractal, fractol);
 	mlx_key_hook(fractol->mlx, &ft_hook, fractol);

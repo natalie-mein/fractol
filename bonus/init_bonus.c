@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_bonus.c                                   :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 14:33:36 by nmeintje          #+#    #+#             */
-/*   Updated: 2024/09/23 15:52:40 by nmeintje         ###   ########.fr       */
+/*   Updated: 2024/09/25 13:55:49 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ void	burning_init(t_fractol *fractol)
 	fractol->i_max = 2.0;
 }
 
-size_t  ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
-        size_t  i;
+	size_t	i;
 
-        i = 0;
-        while (str[i] != '\0')
-                i++;
-        return (i);
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }

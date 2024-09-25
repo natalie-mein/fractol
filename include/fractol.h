@@ -6,7 +6,7 @@
 /*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:14:57 by nmeintje          #+#    #+#             */
-/*   Updated: 2024/09/23 16:04:28 by nmeintje         ###   ########.fr       */
+/*   Updated: 2024/09/25 13:59:10 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ int32_t	compute_color(t_fractol *fractol, int i);
 double	ft_atof(char *str);
 double	ft_abs(double x);
 void	ft_putendl_fd(char *s, int fd);
-size_t  ft_strlen(const char *str);
+size_t	ft_strlen(const char *str);
 
 #endif

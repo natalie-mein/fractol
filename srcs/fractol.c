@@ -98,8 +98,13 @@ int	main(int argc, char **argv)
 	t_fractol	*fractol;
 
 	fractol = (t_fractol *)malloc(sizeof(t_fractol));
+	if (!fractol)
+		return (0);
 	if (argc < 2 || !ft_check_args(argv[1], fractol))
+	{
+		free(fractol);
 		help_msg();
+	}
 	fractol_init(fractol, argv);
 	mlx_loop_hook(fractol->mlx, &ft_fractal, fractol);
 	mlx_key_hook(fractol->mlx, &ft_hook, fractol);
@@ -108,5 +113,6 @@ int	main(int argc, char **argv)
 	mlx_scroll_hook(fractol->mlx, &ft_scroll, fractol);
 	mlx_loop(fractol->mlx);
 	mlx_terminate(fractol->mlx);
+	free(fractol);
 	return (0);
 }

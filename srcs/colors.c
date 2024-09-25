@@ -6,7 +6,7 @@
 /*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:05:43 by nmeintje          #+#    #+#             */
-/*   Updated: 2024/09/23 15:41:30 by nmeintje         ###   ########.fr       */
+/*   Updated: 2024/09/25 13:57:45 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int32_t	julia_color(t_fractol *frac, double z_x, double z_y)
 	else
 		return (compute_color(frac, i));
 }
-
 
 int32_t	compute_color(t_fractol *f, int i)
 {
