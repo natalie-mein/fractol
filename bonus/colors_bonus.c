@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   colors_bonus.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 // mandelbrot color
 int32_t	mandel_color(t_fractol *frac, double c_x, double c_y)
@@ -66,6 +66,32 @@ int32_t	julia_color(t_fractol *frac, double z_x, double z_y)
 		return (compute_color(frac, i));
 }
 
+// burning color
+int32_t	burning_color(t_fractol *frac, double c_x, double c_y)
+{
+	double	pixel_size;
+	double	temp;
+	int		i;
+
+	i = 0;
+	frac->z.x = 0.0;
+	frac->z.y = 0.0;
+	pixel_size = (frac->r_max - frac->r_min) / WIDTH;
+	c_x = frac->r_min + c_x * pixel_size;
+	c_y = frac->i_min + (c_y * pixel_size);
+	temp = 0;
+	while (frac->z.x * frac->z.x + frac->z.y * frac->z.y < 4 && i < MAX_ITER)
+	{
+		temp = frac->z.x;
+		frac->z.x = frac->z.x * frac->z.x - frac->z.y * frac->z.y + c_x;
+		frac->z.y = 2 * ft_abs(temp * frac->z.y) + c_y;
+		i++;
+	}
+	if (i == MAX_ITER)
+		return (ft_pixel(0, 0, 0, 255));
+	else
+		return (compute_color(frac, i));
+}
 
 int32_t	compute_color(t_fractol *f, int i)
 {
@@ -77,6 +103,18 @@ int32_t	compute_color(t_fractol *f, int i)
 		f->rgb.red = 255 * 9 * (1 - t) * t * t * t;
 		f->rgb.green = 15 * 255 * (1 - t) * (1 - t) * t * t;
 		f->rgb.blue = 8.5 * 255 * (1 - t) * (1 - t) * (1 - t) * t;
+	}
+	if (f->color == 2)
+	{
+		f->rgb.red = 255 * 9 * (1 - t) * t * t * t;
+		f->rgb.green = 8.5 * 255 * (1 - t) * (1 - t) * (1 - t) * t;
+		f->rgb.blue = 9 * 255 * (1 - t) * (1 - t) * t * t;
+	}
+	if (f->color == 3)
+	{
+		f->rgb.red = 8.5 * 255 * (1 - t) * (1 - t) * (1 - t) * t;
+		f->rgb.green = 9 * 255 * (1 - t) * (1 - t) * t * t;
+		f->rgb.blue = 255 * 8.5 * (1 - t) * t * t * t;
 	}
 	return (ft_pixel(f->rgb.red, f->rgb.green, f->rgb.blue, 255));
 }

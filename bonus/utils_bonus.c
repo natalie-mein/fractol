@@ -10,20 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 void	help_msg(void)
 {
 	ft_putendl_fd("~~~~~~~~Available Fractals~~~~~~~~~~", 1);
 	ft_putendl_fd("\tPlease type:", 1);
-	ft_putendl_fd("mandelbrot or julia", 1);
+	ft_putendl_fd("mandelbrot, julia, or burning", 1);
 	ft_putendl_fd("\n", 1);
 	ft_putendl_fd("For Julia, you may specify starting values", 1);
 	ft_putendl_fd("between -2.0 and 2.0. Remember to include", 1);
 	ft_putendl_fd("one decimal place.", 1);
 	ft_putendl_fd("\n\nExamples for Julia sets:\n\t-0.4\t0.6", 1);
-	ft_putendl_fd("\t0.285\t0.01\n\t0\t0.8", 1);
-	ft_putendl_fd("\t-1.476\t0\n\t-0.12\t-0.77", 1);
+	ft_putendl_fd("\n\t0.285\t0.01\n\t0\t0.8", 1);
+	ft_putendl_fd("\n\t-1.476\t0\n\t-0.12\t-0.77", 1);
 	exit (1);
 }
 

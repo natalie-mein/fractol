@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   hooks_bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 void	ft_hook(mlx_key_data_t keydata, void *param)
 {
@@ -83,6 +83,19 @@ void	arrow_keys(void *param)
 		fractol->i_min -= 0.025 * delta;
 		fractol->i_max -= 0.025 * delta;
 	}
+}
+
+void	colors_hook(void *param)
+{
+	t_fractol	*fractol;
+
+	fractol = (t_fractol *)param;
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_1))
+		fractol->color = 1;
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_2))
+		fractol->color = 2;
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_3))
+		fractol->color = 3;
 }
 
 void	julia_hook(void *param)

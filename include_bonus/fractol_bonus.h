@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   fractol_bonus.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#ifndef FRACTOL_BONUS_H
+# define FRACTOL_BONUS_H
 
 # include <unistd.h>
 # include <fcntl.h>
@@ -27,6 +27,7 @@
 # define MAX_ITER 100
 # define MANDELBROT 1
 # define JULIA 2
+# define BURNING 3
 
 typedef struct s_map
 {
@@ -69,6 +70,7 @@ typedef struct s_fractol
 void	mandelbrot_init(t_fractol *fractol);
 void	julia_init(t_fractol *fractol);
 void	julia_params(t_fractol *fractol, char **av);
+void	burning_init(t_fractol *fractol);
 
 /* hooks*/
 void	help_msg(void);
@@ -76,10 +78,12 @@ void	ft_hook(mlx_key_data_t keydata, void *param);
 void	arrow_keys(void *param);
 void	ft_scroll(double xdelta, double ydelta, void *param);
 void	julia_hook(void *param);
+void	colors_hook(void *param);
 
 /* colors */
 int32_t	mandel_color(t_fractol *fractol, double x, double y);
 int32_t	julia_color(t_fractol *fractol, double x, double y);
+int32_t	burning_color(t_fractol *fractol, double x, double y);
 int32_t	ft_pixel(int32_t red, int32_t green, int32_t blue, int32_t a);
 int32_t	compute_color(t_fractol *fractol, int i);
 

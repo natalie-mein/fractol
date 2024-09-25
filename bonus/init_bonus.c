@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialization.c                                   :+:      :+:    :+:   */
+/*   init_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 // Mandelbrot initialization
 void	mandelbrot_init(t_fractol *fractol)
@@ -49,3 +49,11 @@ void	julia_params(t_fractol *fractol, char **av)
 	}
 }
 
+// Burning ship function
+void	burning_init(t_fractol *fractol)
+{
+	fractol->r_min = -2.0;
+	fractol->r_max = 2.0;
+	fractol->i_min = -2.0;
+	fractol->i_max = 2.0;
+}

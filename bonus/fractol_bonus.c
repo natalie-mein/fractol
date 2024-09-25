@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
+/*   fractol_bonus.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 static int	ft_check_args(char *str, t_fractol *fractol)
 {
@@ -22,6 +22,11 @@ static int	ft_check_args(char *str, t_fractol *fractol)
 	if (ft_strncmp(str, "julia", 6) == 0)
 	{
 		fractol->type = JULIA;
+		return (1);
+	}
+	if (ft_strncmp(str, "burning", 9) == 0)
+	{
+		fractol->type = BURNING;
 		return (1);
 	}
 	else
@@ -40,6 +45,8 @@ static void	fractol_init(t_fractol *fractol, char **av)
 		julia_init(fractol);
 		julia_params(fractol, av);
 	}
+	else if (fractol->type == BURNING)
+		burning_init(fractol);
 	fractol->zoom = 1.05;
 	fractol->color = 1;
 	fractol->set = av[1];
@@ -69,6 +76,8 @@ void	ft_fractal(void *param)
 				color = mandel_color(fractol, x, y);
 			else if (fractol->type == JULIA)
 				color = julia_color(fractol, x, y);
+			else if (fractol->type == BURNING)
+				color = burning_color(fractol, x, y);
 			mlx_put_pixel(fractol->image, x, y, color);
 			y++;
 		}
@@ -87,6 +96,7 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(fractol->mlx, &ft_fractal, fractol);
 	mlx_key_hook(fractol->mlx, &ft_hook, fractol);
 	mlx_loop_hook(fractol->mlx, &arrow_keys, fractol);
+	mlx_loop_hook(fractol->mlx, &colors_hook, fractol);
 	mlx_loop_hook(fractol->mlx, &julia_hook, fractol);
 	mlx_scroll_hook(fractol->mlx, &ft_scroll, fractol);
 	mlx_loop(fractol->mlx);

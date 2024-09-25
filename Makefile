@@ -16,60 +16,85 @@ NAME = fractol
 MLX_DIR = ./lib/MLX42
 LIBFT_DIR = ./lib/libft
 SRC_DIR = ./srcs
+BONUS_DIR = ./bonus
+OBJ_DIR = $(SRC_DIR)/objects
+BONUS_OBJ_DIR = $(BONUS_DIR)/bonus_objects
 
-#src / obj files
+# src / obj files
 SOURCES = fractol.c \
 		colors.c \
 		hooks.c	\
 		initialization.c \
 		utils.c \
 
-SRCS = $(addprefix $(SRC_DIR)/,$(SOURCES))
+BONUS = fractol_bonus.c \
+		colors_bonus.c \
+		hooks_bonus.c \
+		init_bonus.c \
+		utils_bonus.c \
 
-OBJS = $(SRCS:.c=.o)
+SRCS = $(addprefix $(SRC_DIR)/,$(SOURCES))
+BONUS_SRC = $(addprefix $(BONUS_DIR)/,$(BONUS))
+
+OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(notdir $(SRCS)))
+BONUS_OBJS = $(patsubst %.c,$(BONUS_OBJ_DIR)/%.o,$(notdir $(BONUS)))
 
 HEADERS =  -I ./include -I $(MLX_DIR)/include -I $(LIBFT_DIR)
+BONUS_HEADERS = -I ./include_bonus -I $(MLX_DIR)/include -I $(LIBFT_DIR)
 
-# MLX42 dependencies - dl dynamically loaded lib, glfw graphics library framework m math library
+MLXLIB = $(MLX_DIR)/build/libmlx42.a
+LIBFT = $(LIBFT_DIR)/libft.a
 
-MLXLIB = $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -lm -lpthread
+# MLX42 dependencies - dl dynamically loaded lib, 
+# glfw graphics library framework m math library
 
-LIBFT = -L $(LIBFT_DIR) -lft
+MLXLIB_FLAGS = $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -lm -lpthread
+LIBFT_FLAGS = -L $(LIBFT_DIR) -lft
 
-cc = cc
-
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -rf
 
-# do I need this? .c.o part?
-.c.o:
-	$(CC) $(CFLAGS) -c -I $(HEADERS) $< -o $(<:.c=.o)
+all: $(LIBFT) $(MLXLIB) $(NAME)
 
-$(NAME): mlx libft $(OBJS)
-	@$(CC) $(OBJS) $(LIBFT) $(MLXLIB) $(HEADERS) -o $@
+$(NAME): $(OBJS)
+	@$(CC) $(OBJS) $(LIBFT_FLAGS) $(MLXLIB) $(MLXLIB_FLAGS) $(HEADERS) -o $@
 
-mlx:
+$(MLXLIB):
 	@cd lib && git clone https://github.com/codam-coding-college/MLX42.git
 	@cmake $(MLX_DIR) -B $(MLX_DIR)/build && make -C $(MLX_DIR)/build -j4
 
-libft:
+$(LIBFT):
 	@make -C $(LIBFT_DIR)
 
-$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
-all: $(NAME)
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+bonus: $(LIBFT) $(MLXLIB) $(BONUS_OBJS)
+	$(CC) $(BONUS_OBJS) $(LIBFT_FLAGS) $(MLXLIB) $(MLXLIB_FLAGS) $(BONUS_HEADERS) -o $(NAME)_bonus
+
+$(BONUS_OBJ_DIR)/%.o: $(BONUS_DIR)/%.c | $(BONUS_OBJ_DIR)
+	@$(CC) $(CFLAGS) $(BONUS_HEADERS) -c $< -o $@
+
+$(BONUS_OBJ_DIR):
+	@mkdir -p $(BONUS_OBJ_DIR)
 
 clean:
-	@$(RM) $(OBJS)
+	@$(RM) $(OBJ_DIR)
+	@$(RM) $(BONUS_OBJ_DIR)
 	@$(RM) $(MLX_DIR)/build
 	@make -C $(LIBFT_DIR) clean
 
 fclean: clean
 		@$(RM) $(NAME)
+		@$(RM) $(NAME)_bonus
+		@$(RM) $(MLX_DIR)
 		@make -C $(LIBFT_DIR) fclean
 
 re:		fclean all
 
-.PHONY: all mx libft clean fclean re
+.PHONY: all bonus clean fclean re
