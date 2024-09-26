@@ -15,10 +15,10 @@
 // Mandelbrot initialization
 void	mandelbrot_init(t_fractol *fractol)
 {
-	fractol->r_min = -1.5;
+	fractol->r_min = -2.0;
 	fractol->r_max = 1.0;
-	fractol->i_min = -1.0;
-	fractol->i_max = 1.0;
+	fractol->i_min = -1.5;
+	fractol->i_max = 1.5;
 }
 
 // Julia function

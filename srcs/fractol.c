@@ -29,7 +29,7 @@ static int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-static int	ft_check_args(char *str, t_fractol *fractol)
+static int	ft_check_args(int argc, char *str, t_fractol *fractol)
 {
 	if (ft_strncmp(str, "mandelbrot", 11) == 0)
 	{
@@ -100,7 +100,7 @@ int	main(int argc, char **argv)
 	fractol = (t_fractol *)malloc(sizeof(t_fractol));
 	if (!fractol)
 		return (0);
-	if (argc < 2 || !ft_check_args(argv[1], fractol))
+	if (argc < 2 || !ft_check_args(argc, argv[1], fractol))
 	{
 		free(fractol);
 		help_msg();

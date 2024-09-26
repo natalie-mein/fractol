@@ -59,29 +59,31 @@ void	ft_scroll(double xdelta, double ydelta, void *param)
 void	arrow_keys(void *param)
 {
 	t_fractol	*fractol;
-	double		delta;
+	double		rdelta;
+	double		idelta;
 
 	fractol = (t_fractol *)param;
-	delta = fractol->r_max - fractol->r_min;
+	rdelta = fractol->r_max - fractol->r_min;
+	idelta = fractol->i_max - fractol->i_min;
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT))
 	{
-		fractol->r_min -= 0.025 * delta;
-		fractol->r_max -= 0.025 * delta;
+		fractol->r_min -= 0.025 * rdelta;
+		fractol->r_max -= 0.025 * rdelta;
 	}
-	if (mlx_is_key_down(fractol->mlx, MLX_KEY_RIGHT))
+	else if (mlx_is_key_down(fractol->mlx, MLX_KEY_RIGHT))
 	{
-		fractol->r_min += 0.025 * delta;
-		fractol->r_max += 0.025 * delta;
+		fractol->r_min += 0.025 * rdelta;
+		fractol->r_max += 0.025 * rdelta;
 	}
-	if (mlx_is_key_down(fractol->mlx, MLX_KEY_UP))
+	else if (mlx_is_key_down(fractol->mlx, MLX_KEY_UP))
 	{
-		fractol->i_min += 0.025 * delta;
-		fractol->i_max += 0.025 * delta;
+		fractol->i_min += 0.025 * idelta;
+		fractol->i_max += 0.025 * idelta;
 	}
-	if (mlx_is_key_down(fractol->mlx, MLX_KEY_DOWN))
+	else if (mlx_is_key_down(fractol->mlx, MLX_KEY_DOWN))
 	{
-		fractol->i_min -= 0.025 * delta;
-		fractol->i_max -= 0.025 * delta;
+		fractol->i_min -= 0.025 * idelta;
+		fractol->i_max -= 0.025 * idelta;
 	}
 }
 

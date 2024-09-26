@@ -91,5 +91,8 @@ double	ft_atof(char *str);
 double	ft_abs(double x);
 void	ft_putendl_fd(char *s, int fd);
 size_t	ft_strlen(const char *str);
+int		ft_valid_arg(int ac, char **av, t_fractol *f);
+int		ft_signed_dec(char *str);
+int     ft_isdigit(int c);
 
 #endif

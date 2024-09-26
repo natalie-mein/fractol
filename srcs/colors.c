@@ -24,7 +24,7 @@ int32_t	mandel_color(t_fractol *frac, double c_x, double c_y)
 	frac->z.y = 0.0;
 	pixel_size = (frac->r_max - frac->r_min) / WIDTH;
 	c_x = frac->r_min + c_x * pixel_size;
-	c_y = frac->r_max - (c_y * pixel_size);
+	c_y = frac->i_max - (c_y * pixel_size);
 	temp = 0;
 	while (frac->z.x * frac->z.x + frac->z.y * frac->z.y < 4 && i < MAX_ITER)
 	{
