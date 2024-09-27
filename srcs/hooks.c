@@ -6,7 +6,7 @@
 /*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:48:21 by nmeintje          #+#    #+#             */
-/*   Updated: 2024/09/23 15:49:07 by nmeintje         ###   ########.fr       */
+/*   Updated: 2024/09/27 11:45:55 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,9 @@ void	arrow_keys(void *param)
 {
 	t_fractol	*fractol;
 	double		rdelta;
-	double		idelta;
 
 	fractol = (t_fractol *)param;
 	rdelta = fractol->r_max - fractol->r_min;
-	idelta = fractol->i_max - fractol->i_min;
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT))
 	{
 		fractol->r_min -= 0.025 * rdelta;
@@ -77,13 +75,13 @@ void	arrow_keys(void *param)
 	}
 	else if (mlx_is_key_down(fractol->mlx, MLX_KEY_UP))
 	{
-		fractol->i_min += 0.025 * idelta;
-		fractol->i_max += 0.025 * idelta;
+		fractol->i_min += 0.025 * rdelta;
+		fractol->i_max += 0.025 * rdelta;
 	}
 	else if (mlx_is_key_down(fractol->mlx, MLX_KEY_DOWN))
 	{
-		fractol->i_min -= 0.025 * idelta;
-		fractol->i_max -= 0.025 * idelta;
+		fractol->i_min -= 0.025 * rdelta;
+		fractol->i_max -= 0.025 * rdelta;
 	}
 }
 

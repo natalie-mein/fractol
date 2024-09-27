@@ -6,13 +6,13 @@
 /*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:14:09 by nmeintje          #+#    #+#             */
-/*   Updated: 2024/09/02 14:33:16 by nmeintje         ###   ########.fr       */
+/*   Updated: 2024/09/27 12:03:19 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	unsigned int	i;
 
@@ -29,23 +29,27 @@ static int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-static int	ft_check_args(int argc, char *str, t_fractol *fractol)
+static int	ft_check_args(int ac, char **av, t_fractol *fractol)
 {
-	if (ft_strncmp(str, "mandelbrot", 11) == 0)
+	if (ac == 2)
 	{
-		fractol->type = MANDELBROT;
-		return (1);
-	}
-	if (ft_strncmp(str, "julia", 6) == 0)
-	{
-		fractol->type = JULIA;
-		return (1);
+		if (ft_strncmp(av[1], "mandelbrot", 11) == 0)
+		{
+			fractol->type = MANDELBROT;
+			return (1);
+		}
+		if (ft_strncmp(av[1], "julia", 6) == 0)
+		{
+			fractol->type = JULIA;
+			return (1);
+		}
 	}
 	else
 	{
 		fractol->type = -1;
 		return (0);
 	}
+	return (0);
 }
 
 static void	fractol_init(t_fractol *fractol, char **av)
@@ -100,11 +104,13 @@ int	main(int argc, char **argv)
 	fractol = (t_fractol *)malloc(sizeof(t_fractol));
 	if (!fractol)
 		return (0);
-	if (argc < 2 || !ft_check_args(argc, argv[1], fractol))
+	if (argc < 2 || !ft_check_args(argc, argv, fractol))
 	{
 		free(fractol);
 		help_msg();
 	}
+	if (argc > 2)
+		ft_valid_arg(argc, argv, fractol);
 	fractol_init(fractol, argv);
 	mlx_loop_hook(fractol->mlx, &ft_fractal, fractol);
 	mlx_key_hook(fractol->mlx, &ft_hook, fractol);

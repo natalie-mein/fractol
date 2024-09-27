@@ -6,7 +6,7 @@
 /*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:14:57 by nmeintje          #+#    #+#             */
-/*   Updated: 2024/09/25 14:00:30 by nmeintje         ###   ########.fr       */
+/*   Updated: 2024/09/27 12:13:15 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	ft_putendl_fd(char *s, int fd);
 size_t	ft_strlen(const char *str);
 int		ft_valid_arg(int ac, char **av, t_fractol *f);
 int		ft_signed_dec(char *str);
-int     ft_isdigit(int c);
+int		ft_isdigit(int c);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

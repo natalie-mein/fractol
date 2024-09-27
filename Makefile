@@ -25,12 +25,14 @@ SOURCES = fractol.c \
 		hooks.c	\
 		initialization.c \
 		utils.c \
+		validity.c
 
 BONUS = fractol_bonus.c \
 		colors_bonus.c \
 		hooks_bonus.c \
 		init_bonus.c \
 		utils_bonus.c \
+		validity_bonus.c \
 
 SRCS = $(addprefix $(SRC_DIR)/,$(SOURCES))
 BONUS_SRC = $(addprefix $(BONUS_DIR)/,$(BONUS))
