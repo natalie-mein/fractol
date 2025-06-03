@@ -36,3 +36,6 @@ The bonus part involved more fancy things with the mouse and also an extra fract
     <img width="33%" src="https://github.com/Arcane-Jill/images/blob/main/burning-ship-red.png">
 </p>
 Burning ship fractal
+
+### **How to use**
+#### Clone the repository
