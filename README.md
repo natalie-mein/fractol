@@ -46,11 +46,11 @@ git clone git@github.com:natalie-mein/fractol.git fractol && cd fractol
 ```
 make
 ```
-or 
+or to see the burning ship fractals
 ```
 make bonus
 ```
-to see the burning ship fractals
+
 #### Usage
 ```
 ./fractol <name of fractal>
@@ -58,7 +58,7 @@ to see the burning ship fractals
 or 
 ```
 ./fractol_bonus <name of fractal>
-
+```
 If you just enter
 ```
 ./fractol
